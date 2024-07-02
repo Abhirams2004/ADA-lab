@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Item
+{
+ int value;
+ int weight;
+};
+int compare(const void *a,const void *b)
+{
+  double ratioA=((struct Item *)b)->value/(double)((struct Item *)b)->weight;
+  double ratioB=((struct Item *)a)->value/(double)((struct Item *)a)->weight;
+  return ratioA>ratioB?1:-1;
+}
+int discreteKnapsack(struct Item items[],int n,int capacity)
+{
+  qsort(items,n,sizeof(items[0]),compare);
+  int totalValue=0;
+  int remainingCapacity=capacity;
+  for(int i=0;i<n;i++)
+{
+  if(items[i].weight<=remainingCapacity)
+{
+  totalvalue+=items[i].value;
+  remainingCapacity-=items[i.weight;
+}
+else
+{
+ double fraction=(double)remainingCapacity/(double)items[i].weight;
+ totalValue+=items[i].value*fraction;
+break;
+}
+}
+ return totalValue;
+}
+double continuousKnapsack(struct Item items[],int n,int capacity)
+{
+  qsort(items,n,sizeof(items[0]),compare);
+  double totalvalue=0;
+  for(int i=0;i<n;i++)
+{
+  if(items[i].weight<=capacity)
+{
+  totalValue+=items[i].value;
+  capacity-=items[i].weight;
+}
+else
+{
+ totalValue+=items[i].value*((double)capacity/(double)items[i].weight);
+ break;
+}
+}
+return totalValue;
+}
+ int main()
+{
+ int n,capacity;
+ printf("Enter the number of items:");
+ scanf("%d",&n);
+ struct Item items[n];
+ printf("Enter the value and weight of each item:\n");
+for(nt i=0;i<n;i++)
+{
+  scanf("%d%d",&items[i].value,&items[i].weight);
+}
+printf("Enter the capacity of knapsack:");
+scanf("%d",7capacity);
+int max Value=discreteKnapsack(items,n,capacity);
+printf("Maximum value in discrete Knapsack: %d\n",maxValue);
+double max ValueCont=continuousKnapsack9items,n,capacity);
+printf("Maximum value in continuous Knapsack:%.2f\n',max ValueCont);
+return 0;
+}
+
+
+
